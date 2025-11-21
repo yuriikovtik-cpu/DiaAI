@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Dia Komunal servise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="mobile-screen">
+        
+        <div id="page-1" class="page-container">
+            <div class="header">
+                <svg class="back-arrow" id="back-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <div class="header-title">Створення комунальної послуги</div>
+            </div>
+
+            <div class="content">
+                <div class="text-group">
+                    <div class="main-title">Введіть вашу проблему</div>
+                    <div class="subtitle">Опишіть її детально, так щоб ми могли зрозуміти</div>
+                </div>
+                <textarea id="user-input" class="input-card" placeholder="Введіть текст вашої заяви або звернення тут..."></textarea>
+            </div>
+
+            <div class="footer">
+                <button class="btn-black" id="action-btn">Відправити</button>
+            </div>
+        </div>
+
+        <div id="page-2" class="page-container" style="display: none;">
+            
+            <div class="header">
+                <svg class="back-arrow" id="back-btn-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <div class="header-title">Ваша заява</div>
+            </div>
+
+            <div class="content display-area">
+                <div class="display-card-large">
+                    <p id="result-text" class="result-text">
+                        </p>
+                </div>
+            </div>
+
+            <div class="bottom-floating-card">
+                <div class="bottom-label">Маєте ще одну скаргу? Опишіть її нижче:</div>
+                
+                <input type="text" id="new-complaint-input" class="small-input" placeholder="Короткий опис...">
+                
+                <button id="new-complaint-btn" class="btn-black" style="margin-top: 15px;">Надіслати ще раз</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
