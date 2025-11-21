@@ -5,13 +5,36 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Medium.otf') format('opentype');
+    font-weight: 500; /* або 600, залежно від потреб */
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'e-Ukraine', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; 
 }
 
 .mobile-screen {
