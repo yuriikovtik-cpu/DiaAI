@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="uk">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Medium.otf') format('opentype');
+    font-weight: 500; /* або 600, залежно від потреб */
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'e-Ukraine';
+    src: url('fonts/e-Ukraine-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'e-Ukraine', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.mobile-screen {
+    width: 100%;
+    max-width: 390px;
+    height: 844px;
+    background: linear-gradient(180deg, #9ccbf3 0%, #e4f6d6 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.page-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Хедер */
+.header {
+    padding: 20px;
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.back-arrow {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.back-arrow:active {
+    transform: scale(0.85) translateX(-3px);
+    opacity: 0.6;
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 24px;
+}
+
+/* Контент */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.text-group {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.main-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Інпут першої сторінки */
+.input-card {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+    resize: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.input-card::placeholder { color: #999; }
+
+.footer {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.btn-black {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 60px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.1s;
+}
+
+.btn-black:active { transform: scale(0.98); }
+
+/* === СТИЛІ ДЛЯ СТОРІНКИ 2 === */
+
+/* Зона виводу тексту */
+.display-area {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+
+.display-card-large {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.result-text {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.bottom-floating-card {
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 20px;
+
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.bottom-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.small-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    background-color: #f9f9f9;
+    outline: none;
+    font-size: 16px;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Dia Komunal servise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="mobile-screen">
+        
+        <div id="page-1" class="page-container">
+            <div class="header">
+                <svg class="back-arrow" id="back-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <div class="header-title">Створення комунальної послуги</div>
+            </div>
+
+            <div class="content">
+                <div class="text-group">
+                    <div class="main-title">Введіть вашу проблему</div>
+                    <div class="subtitle">Опишіть її детально, так щоб ми могли зрозуміти</div>
+                </div>
+                <textarea id="user-input" class="input-card" placeholder="Введіть текст вашої заяви або звернення тут..."></textarea>
+            </div>
+
+            <div class="footer">
+                <button class="btn-black" id="action-btn">Відправити</button>
+            </div>
+        </div>
+
+        <div id="page-2" class="page-container" style="display: none;">
+            
+            <div class="header">
+                <svg class="back-arrow" id="back-btn-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <div class="header-title">Ваша заява</div>
+            </div>
+
+            <div class="content display-area">
+                <div class="display-card-large">
+                    <p id="result-text" class="result-text">
+                        </p>
+                </div>
+            </div>
+
+            <div class="bottom-floating-card">
+                <div class="bottom-label">Маєте ще одну скаргу? Опишіть її нижче:</div>
+                
+                <input type="text" id="new-complaint-input" class="small-input" placeholder="Короткий опис...">
+                
+                <button id="new-complaint-btn" class="btn-black" style="margin-top: 15px;">Надіслати ще раз</button>
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+const page1 = document.getElementById('page-1');
+const page2 = document.getElementById('page-2');
+
+const actionButton = document.getElementById('action-btn');
+const userInput = document.getElementById('user-input');
+const backButton = document.getElementById('back-btn');
+
+const resultText = document.getElementById('result-text');
+const backButton2 = document.getElementById('back-btn-2');
+const newComplaintInput = document.getElementById('new-complaint-input');
+const newComplaintBtn = document.getElementById('new-complaint-btn');
+
+// Кнопка назад на першій сторінці
+backButton.addEventListener('click', () => {
+    alert("Ви вже на головній сторінці");
+});
+
+// Кнопка назад на другій сторінці
+backButton2.addEventListener('click', () => {
+    page2.style.display = 'none';
+    page1.style.display = 'flex';
+});
+
+// Відправка основної скарги
+actionButton.addEventListener('click', async () => {
+    const text = userInput.value.trim();
+    if (!text) {
+        alert("Введіть текст заяви!");
+        return;
+    }
+
+    try {
+        const response = await fetch("/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+        });
+
+        const data = await response.json();
+
+        if (!data.result) {
+            alert("Помилка сервера: порожня відповідь");
+            return;
+        }
+
+        resultText.innerText = `Ваша скарга направлена до: ${data.result}`;
+        page1.style.display = 'none';
+        page2.style.display = 'flex';
+        userInput.value = "";
+
+    } catch (err) {
+        console.error(err);
+        alert("Сталася помилка при відправці. Сервер не відповідає.");
+    }
+});
+
+newComplaintBtn.addEventListener('click', async () => {
+    const newText = newComplaintInput.value.trim();
+    if (!newText) {
+        alert("Напишіть нову скаргу в нижньому полі!");
+        return;
+    }
+
+    try {
+        const response = await fetch("/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: newText })
+        });
+
+        const data = await response.json();
+
+        if (!data.result) {
+            alert("Помилка сервера: порожня відповідь");
+            return;
+        }
+
+        resultText.innerText = `${data.result}`;
+        newComplaintInput.value = "";
+
+    } catch (err) {
+        console.error(err);
+        alert("Сталася помилка при відправці нової скарги.");
+    }
+});
+</script>
+
+</body>
+
+</html>
